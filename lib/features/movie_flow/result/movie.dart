@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:moviefinder/features/movie_flow/genre/genre.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 @immutable
 class Movie {

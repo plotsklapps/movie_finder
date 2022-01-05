@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/core/widgets/primary_button.dart';
-import 'package:moviefinder/features/movie_flow/result/result_screen.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class YearsBackScreen extends StatefulWidget {
   const YearsBackScreen({
@@ -32,9 +29,12 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
       body: Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: kMediumSpacing,
+            ),
             Text(
               'How many years back should we check for?',
-              style: theme.textTheme.headline5,
+              style: theme.textTheme.headline4,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
@@ -43,7 +43,9 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
               children: [
                 Text(
                   '${yearsBack.ceil()}',
-                  style: theme.textTheme.headline2,
+                  style: theme.textTheme.headline1?.copyWith(
+                    color: kOrangeColor,
+                  ),
                 ),
                 Text(
                   'Years back',
@@ -67,7 +69,7 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
             ),
             const Spacer(),
             PrimaryButton(
-              text: 'Let\'s gooo',
+              text: 'Let\'s gooo!',
               onPressed: () => Navigator.of(context).push(
                 ResultScreen.route(),
               ),

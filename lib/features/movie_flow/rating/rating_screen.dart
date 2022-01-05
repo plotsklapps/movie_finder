@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/core/widgets/primary_button.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({
@@ -31,9 +29,12 @@ class _RatingScreenState extends State<RatingScreen> {
       body: Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: kMediumSpacing,
+            ),
             Text(
               'Select a minimum rating\nranging from 1 - 10',
-              style: theme.textTheme.headline5,
+              style: theme.textTheme.headline4,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
@@ -42,11 +43,11 @@ class _RatingScreenState extends State<RatingScreen> {
               children: [
                 Text(
                   '${rating.ceil()}',
-                  style: theme.textTheme.headline2,
+                  style: theme.textTheme.headline1,
                 ),
                 const Icon(
                   Icons.star_rounded,
-                  color: Colors.amber,
+                  color: kOrangeColor,
                   size: 62.0,
                 ),
               ],

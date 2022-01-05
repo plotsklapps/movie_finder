@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/theme/custom_theme.dart';
-import 'package:moviefinder/features/movie_flow/movie_flow.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      darkTheme: CustomTheme.darkTheme(context),
-      themeMode: ThemeMode.dark,
+      theme: themeLight,
+      darkTheme: themeDark,
+      themeMode: ThemeMode.system,
       home: const MovieFlow(),
     );
   }

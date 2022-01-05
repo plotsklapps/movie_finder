@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/core/widgets/primary_button.dart';
-import 'package:moviefinder/features/movie_flow/genre/genre.dart';
-import 'package:moviefinder/features/movie_flow/result/movie.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class ResultScreen extends StatelessWidget {
   static route({bool fullscreenDialog = true}) => MaterialPageRoute(
@@ -32,6 +28,9 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
+          const SizedBox(
+            height: kMediumSpacing,
+          ),
           Expanded(
             child: ListView(
               children: [
@@ -160,7 +159,7 @@ class MovieImageDetails extends StatelessWidget {
                     const Icon(
                       Icons.star_rounded,
                       size: 20.0,
-                      color: Colors.amber,
+                      color: kOrangeColor,
                     )
                   ],
                 ),

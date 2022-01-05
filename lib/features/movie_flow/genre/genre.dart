@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 @immutable
 class Genre {

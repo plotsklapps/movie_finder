@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/features/movie_flow/genre/genre.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class ListCard extends StatelessWidget {
   const ListCard({Key? key, required this.genre, required this.onTap})
@@ -14,7 +12,7 @@ class ListCard extends StatelessWidget {
     return UnconstrainedBox(
       child: Material(
         color: genre.isSelected
-            ? Theme.of(context).colorScheme.primary
+            ? Theme.of(context).colorScheme.secondary
             : Colors.transparent,
         borderRadius: BorderRadius.circular(
           kBorderRadius,
@@ -33,6 +31,7 @@ class ListCard extends StatelessWidget {
             child: Text(
               genre.name,
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
         ),

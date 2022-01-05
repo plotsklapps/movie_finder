@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/features/movie_flow/genre/genre_screen.dart';
-import 'package:moviefinder/features/movie_flow/landing/landing_screen.dart';
-import 'package:moviefinder/features/movie_flow/rating/rating_screen.dart';
-import 'package:moviefinder/features/movie_flow/years_back/years_back_screen.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class MovieFlow extends StatefulWidget {
   const MovieFlow({Key? key}) : super(key: key);

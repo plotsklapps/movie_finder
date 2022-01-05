@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
@@ -19,27 +18,18 @@ class PrimaryButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 12.0,
       ),
-      child: TextButton(
+      child: ElevatedButton(
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,
-              style: Theme.of(context).textTheme.button,
             ),
           ],
         ),
-        style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              kBorderRadius / 2,
-            ),
-          ),
-          fixedSize: Size(
-            width,
-            48.0,
-          ),
+        style: ElevatedButton.styleFrom(
+          elevation: 8.0,
         ),
       ),
     );

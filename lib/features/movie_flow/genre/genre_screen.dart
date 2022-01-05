@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/core/widgets/primary_button.dart';
-import 'package:moviefinder/features/movie_flow/genre/genre.dart';
-import 'package:moviefinder/features/movie_flow/genre/list_card.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class GenreScreen extends StatefulWidget {
   const GenreScreen(
@@ -51,7 +47,10 @@ class _GenreScreenState extends State<GenreScreen> {
           children: [
             Text(
               'Let\'s start with a genre',
-              style: theme.textTheme.headline5,
+              style: theme.textTheme.headline4,
+            ),
+            const SizedBox(
+              height: kMediumSpacing,
             ),
             Expanded(
               child: ListView.separated(

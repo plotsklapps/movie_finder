@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:moviefinder/core/constants.dart';
-import 'package:moviefinder/core/widgets/primary_button.dart';
+import 'package:moviefinder/core/all_imports.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({
@@ -21,7 +19,7 @@ class LandingScreen extends StatelessWidget {
           children: [
             Text(
               'Let\'s find a movie',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headline4,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
