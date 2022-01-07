@@ -1,29 +1,21 @@
 import 'package:moviefinder/core/all_imports.dart';
+import 'package:moviefinder/features/movie_flow_controller.dart';
 
-class YearsBackScreen extends StatefulWidget {
+class YearsBackScreen extends ConsumerWidget {
   const YearsBackScreen({
     Key? key,
-    required this.nextPage,
-    required this.previousPage,
   }) : super(key: key);
 
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
+  final double yearsBack = 10;
 
   @override
-  _YearsBackScreenState createState() => _YearsBackScreenState();
-}
-
-class _YearsBackScreenState extends State<YearsBackScreen> {
-  double yearsBack = 10;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: widget.previousPage,
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -42,7 +34,7 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${yearsBack.ceil()}',
+                  '${ref.watch(movieFlowControllerProvider).yearsBack}',
                   style: theme.textTheme.headline1?.copyWith(
                     color: kOrangeColor,
                   ),
@@ -54,16 +46,22 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
                   ),
                 ),
                 Slider(
-                  value: yearsBack,
+                  value: ref
+                      .watch(movieFlowControllerProvider)
+                      .yearsBack
+                      .toDouble(),
                   onChanged: (value) {
-                    setState(() {
-                      yearsBack = value;
-                    });
+                    ref
+                        .read(movieFlowControllerProvider.notifier)
+                        .updateYearsBack(
+                          value.toInt(),
+                        );
                   },
                   min: 0,
                   max: 70,
                   divisions: 69,
-                  label: '${yearsBack.ceil()}',
+                  label:
+                      '${ref.watch(movieFlowControllerProvider).yearsBack.toDouble()}',
                 )
               ],
             ),

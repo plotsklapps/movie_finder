@@ -1,45 +1,19 @@
 import 'package:moviefinder/core/all_imports.dart';
+import 'package:moviefinder/features/movie_flow_controller.dart';
 
-class GenreScreen extends StatefulWidget {
-  const GenreScreen(
-      {Key? key, required this.nextPage, required this.previousPage})
-      : super(key: key);
-
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
+class GenreScreen extends ConsumerWidget {
+  const GenreScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _GenreScreenState createState() => _GenreScreenState();
-}
-
-class _GenreScreenState extends State<GenreScreen> {
-  List<Genre> genres = const [
-    Genre(name: 'Action'),
-    Genre(name: 'Comedy'),
-    Genre(name: 'Horror'),
-    Genre(name: 'Anime'),
-    Genre(name: 'Drama'),
-    Genre(name: 'Family'),
-    Genre(name: 'Romance'),
-  ];
-
-  void toggleSelected(Genre genre) {
-    List<Genre> updatedGenres = [
-      for (final oldGenre in genres)
-        if (oldGenre == genre) oldGenre.toggleSelected() else oldGenre
-    ];
-    setState(() {
-      genres = updatedGenres;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: widget.previousPage,
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -54,24 +28,32 @@ class _GenreScreenState extends State<GenreScreen> {
             ),
             Expanded(
               child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: kListItemSpacing,
-                  ),
-                  itemBuilder: (context, index) {
-                    final genre = genres[index];
-                    return ListCard(
-                      genre: genre,
-                      onTap: () => toggleSelected(genre),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: kListItemSpacing,
-                    );
-                  },
-                  itemCount: genres.length),
+                padding: const EdgeInsets.symmetric(
+                  vertical: kListItemSpacing,
+                ),
+                itemBuilder: (context, index) {
+                  final genre =
+                      ref.watch(movieFlowControllerProvider).genres[index];
+                  return ListCard(
+                    genre: genre,
+                    onTap: () => ref
+                        .read(movieFlowControllerProvider.notifier)
+                        .toggleSelected(genre),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: kListItemSpacing,
+                  );
+                },
+                itemCount: ref.watch(movieFlowControllerProvider).genres.length,
+              ),
             ),
-            PrimaryButton(text: 'Continue', onPressed: widget.nextPage),
+            PrimaryButton(
+              text: 'Continue',
+              onPressed:
+                  ref.read(movieFlowControllerProvider.notifier).nextPage,
+            ),
             const SizedBox(
               height: kMediumSpacing,
             ),

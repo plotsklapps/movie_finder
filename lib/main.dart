@@ -1,7 +1,7 @@
 import 'package:moviefinder/core/all_imports.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

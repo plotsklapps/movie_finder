@@ -1,17 +1,13 @@
 import 'package:moviefinder/core/all_imports.dart';
+import 'package:moviefinder/features/movie_flow_controller.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends ConsumerWidget {
   const LandingScreen({
-    required this.nextPage,
-    required this.previousPage,
     Key? key,
   }) : super(key: key);
 
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -28,7 +24,8 @@ class LandingScreen extends StatelessWidget {
             ),
             const Spacer(),
             PrimaryButton(
-              onPressed: nextPage,
+              onPressed:
+                  ref.read(movieFlowControllerProvider.notifier).nextPage,
               text: 'Get started!',
             ),
             const SizedBox(

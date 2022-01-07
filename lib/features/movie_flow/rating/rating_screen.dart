@@ -1,29 +1,21 @@
 import 'package:moviefinder/core/all_imports.dart';
+import 'package:moviefinder/features/movie_flow_controller.dart';
 
-class RatingScreen extends StatefulWidget {
+class RatingScreen extends ConsumerWidget {
   const RatingScreen({
     Key? key,
-    required this.nextPage,
-    required this.previousPage,
   }) : super(key: key);
 
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
+  final double rating = 5.0;
 
   @override
-  _RatingScreenState createState() => _RatingScreenState();
-}
-
-class _RatingScreenState extends State<RatingScreen> {
-  double rating = 5.0;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: widget.previousPage,
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -42,7 +34,7 @@ class _RatingScreenState extends State<RatingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${rating.ceil()}',
+                  '${ref.watch(movieFlowControllerProvider).rating}',
                   style: theme.textTheme.headline1,
                 ),
                 const Icon(
@@ -54,21 +46,22 @@ class _RatingScreenState extends State<RatingScreen> {
             ),
             const Spacer(),
             Slider(
-              value: rating,
+              value: ref.watch(movieFlowControllerProvider).rating.toDouble(),
               onChanged: (value) {
-                setState(() {
-                  rating = value;
-                });
+                ref.read(movieFlowControllerProvider.notifier).updateRating(
+                      value.toInt(),
+                    );
               },
               min: 1,
               max: 10,
               divisions: 9,
-              label: '${rating.ceil()}',
+              label: '${ref.watch(movieFlowControllerProvider).rating}',
             ),
             const Spacer(),
             PrimaryButton(
               text: 'Continue',
-              onPressed: widget.nextPage,
+              onPressed:
+                  ref.read(movieFlowControllerProvider.notifier).nextPage,
             ),
             const SizedBox(
               height: kMediumSpacing,

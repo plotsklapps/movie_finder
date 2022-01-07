@@ -5,6 +5,7 @@ export 'package:moviefinder/main.dart';
 
 export 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'package:google_fonts/google_fonts.dart';
+export 'package:flutter_riverpod/flutter_riverpod.dart';
 
 export 'package:moviefinder/theme/custom_theme.dart';
 
