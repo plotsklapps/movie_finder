@@ -1,5 +1,5 @@
 import 'package:moviefinder/core/all_imports.dart';
-import 'package:moviefinder/features/movie_flow_controller.dart';
+import 'package:moviefinder/features/movie_flow/movie_flow_controller.dart';
 
 class LandingScreen extends ConsumerWidget {
   const LandingScreen({
