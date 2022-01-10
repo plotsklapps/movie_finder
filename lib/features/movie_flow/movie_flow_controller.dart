@@ -4,9 +4,7 @@ final movieFlowControllerProvider =
     StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
         (ref) {
   return MovieFlowController(
-    MovieFlowState(
-      pageController: PageController(),
-    ),
+    const MovieFlowState(),
   );
 });
 
