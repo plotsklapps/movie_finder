@@ -25,6 +25,7 @@ class MovieFlowPageController extends StateNotifier<MovieFlowState> {
       ),
       curve: Curves.easeOutCubic,
     );
+    // }
   }
 
   void previousPage() {
