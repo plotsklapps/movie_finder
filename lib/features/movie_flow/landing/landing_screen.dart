@@ -1,5 +1,4 @@
 import 'package:moviefinder/core/all_imports.dart';
-import 'package:moviefinder/features/movie_flow/movie_flow_controller.dart';
 
 class LandingScreen extends ConsumerWidget {
   const LandingScreen({
@@ -25,7 +24,7 @@ class LandingScreen extends ConsumerWidget {
             const Spacer(),
             PrimaryButton(
               onPressed:
-                  ref.read(movieFlowControllerProvider.notifier).nextPage,
+                  ref.read(movieFlowPageControllerProvider.notifier).nextPage,
               text: 'Get started!',
             ),
             const SizedBox(

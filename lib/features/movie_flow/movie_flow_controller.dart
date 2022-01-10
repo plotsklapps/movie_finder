@@ -1,5 +1,4 @@
 import 'package:moviefinder/core/all_imports.dart';
-import 'package:moviefinder/features/movie_flow/movie_flow_state.dart';
 
 final movieFlowControllerProvider =
     StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
@@ -29,33 +28,33 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state = state.copyWith(yearsBack: updatedYearsBack);
   }
 
-  void nextPage() {
-    if (state.pageController.page! >= 1) {
-      if (!state.genres.any((element) => element.isSelected == true)) {
-        return;
-      }
-    }
+  // void nextPage() {
+  //   if (state.pageController.page! >= 1) {
+  //     if (!state.genres.any((element) => element.isSelected == true)) {
+  //       return;
+  //     }
+  //   }
+  //
+  //   state.pageController.nextPage(
+  //     duration: const Duration(
+  //       seconds: 1,
+  //     ),
+  //     curve: Curves.easeOutCubic,
+  //   );
+  // }
 
-    state.pageController.nextPage(
-      duration: const Duration(
-        seconds: 1,
-      ),
-      curve: Curves.easeOutCubic,
-    );
-  }
+  // void previousPage() {
+  //   state.pageController.previousPage(
+  //     duration: const Duration(
+  //       seconds: 1,
+  //     ),
+  //     curve: Curves.easeOutCubic,
+  //   );
+  // }
 
-  void previousPage() {
-    state.pageController.previousPage(
-      duration: const Duration(
-        seconds: 1,
-      ),
-      curve: Curves.easeOutCubic,
-    );
-  }
-
-  @override
-  void dispose() {
-    state.pageController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   state.pageController.dispose();
+  //   super.dispose();
+  // }
 }

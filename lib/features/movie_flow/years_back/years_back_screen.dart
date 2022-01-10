@@ -1,5 +1,4 @@
 import 'package:moviefinder/core/all_imports.dart';
-import 'package:moviefinder/features/movie_flow/movie_flow_controller.dart';
 
 class YearsBackScreen extends ConsumerWidget {
   const YearsBackScreen({
@@ -15,7 +14,7 @@ class YearsBackScreen extends ConsumerWidget {
       appBar: AppBar(
         leading: BackButton(
           onPressed:
-              ref.read(movieFlowControllerProvider.notifier).previousPage,
+              ref.read(movieFlowPageControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(

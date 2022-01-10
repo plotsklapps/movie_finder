@@ -15,6 +15,7 @@ export 'package:moviefinder/core/constants.dart';
 export 'package:moviefinder/features/movie_flow/movie_flow.dart';
 export 'package:moviefinder/features/movie_flow/movie_flow_controller.dart';
 export 'package:moviefinder/features/movie_flow/movie_flow_state.dart';
+export 'package:moviefinder/features/movie_flow/movie_flow_pagecontroller.dart';
 
 export 'package:moviefinder/features/movie_flow/genre/genre.dart';
 export 'package:moviefinder/features/movie_flow/genre/genre_screen.dart';

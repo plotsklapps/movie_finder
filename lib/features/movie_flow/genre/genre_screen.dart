@@ -1,5 +1,4 @@
 import 'package:moviefinder/core/all_imports.dart';
-import 'package:moviefinder/features/movie_flow/movie_flow_controller.dart';
 
 class GenreScreen extends ConsumerWidget {
   const GenreScreen({
@@ -13,7 +12,7 @@ class GenreScreen extends ConsumerWidget {
       appBar: AppBar(
         leading: BackButton(
           onPressed:
-              ref.read(movieFlowControllerProvider.notifier).previousPage,
+              ref.read(movieFlowPageControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -52,7 +51,7 @@ class GenreScreen extends ConsumerWidget {
             PrimaryButton(
               text: 'Continue',
               onPressed:
-                  ref.read(movieFlowControllerProvider.notifier).nextPage,
+                  ref.read(movieFlowPageControllerProvider.notifier).nextPage,
             ),
             const SizedBox(
               height: kMediumSpacing,
