@@ -69,7 +69,6 @@ class MovieFlowState {
   }
 
   @override
-  // TODO: implement hashCode
   int get hashCode {
     return pageController.hashCode ^
         rating.hashCode ^
