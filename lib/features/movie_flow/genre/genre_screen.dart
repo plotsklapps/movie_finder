@@ -48,10 +48,46 @@ class GenreScreen extends ConsumerWidget {
                 itemCount: ref.watch(movieFlowControllerProvider).genres.length,
               ),
             ),
-            PrimaryButton(
-              text: 'Continue',
-              onPressed:
-                  ref.read(movieFlowPageControllerProvider.notifier).nextPage,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (ref
+                      .watch(movieFlowControllerProvider)
+                      .genres
+                      .any((element) => element.isSelected == true)) {
+                    ref
+                        .read(movieFlowPageControllerProvider.notifier)
+                        .nextPage();
+                  } else {
+                    final selectGenreSnack = SnackBar(
+                      content:
+                          const Text('Please select at least one (1) genre'),
+                      action: SnackBarAction(
+                        label: 'OK',
+                        onPressed: () {
+                          // Some code to undo the change.
+                        },
+                      ),
+                    );
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(selectGenreSnack);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Continue',
+                    ),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 8.0,
+                ),
+              ),
             ),
             const SizedBox(
               height: kMediumSpacing,
