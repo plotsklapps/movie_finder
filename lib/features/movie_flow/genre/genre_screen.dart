@@ -26,26 +26,40 @@ class GenreScreen extends ConsumerWidget {
               height: kMediumSpacing,
             ),
             Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  vertical: kListItemSpacing,
-                ),
-                itemBuilder: (context, index) {
-                  final genre =
-                      ref.watch(movieFlowControllerProvider).genres[index];
-                  return ListCard(
-                    genre: genre,
-                    onTap: () => ref
-                        .read(movieFlowControllerProvider.notifier)
-                        .toggleSelected(genre),
+              child: ref.watch(movieFlowControllerProvider).genres.when(
+                data: (genres) {
+                  ListView.separated(
+                    itemCount: genres.length,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: kListItemSpacing,
+                    ),
+                    itemBuilder: (context, index) {
+                      final genre = genres[index];
+                      return ListCard(
+                        genre: genre,
+                        onTap: () => ref
+                            .read(movieFlowControllerProvider.notifier)
+                            .toggleSelected(genre),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: kListItemSpacing,
+                      );
+                    },
+                  );
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: kListItemSpacing,
+                error: (e, s) {
+                  return const Text('Sorry, something went wrong.');
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 },
-                itemCount: ref.watch(movieFlowControllerProvider).genres.length,
               ),
             ),
             Padding(
@@ -57,6 +71,8 @@ class GenreScreen extends ConsumerWidget {
                   if (ref
                       .watch(movieFlowControllerProvider)
                       .genres
+                      .asData!
+                      .value
                       .any((element) => element.isSelected == true)) {
                     ref
                         .read(movieFlowPageControllerProvider.notifier)

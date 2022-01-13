@@ -19,7 +19,7 @@ class MovieFlowPageController extends StateNotifier<PageController> {
 
   void nextPage() {
     if (state.page! >= 1) {
-      if (!_movieFlowController.state.genres
+      if (!_movieFlowController.state.genres.asData!.value
           .any((element) => element.isSelected == true)) {
         return;
       }

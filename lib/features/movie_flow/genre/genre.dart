@@ -12,6 +12,14 @@ class Genre {
     this.id = 0,
   });
 
+  factory Genre.fromEntity(GenreEntity entity) {
+    return Genre(
+      name: entity.name,
+      id: entity.id,
+      isSelected: false,
+    );
+  }
+
   Genre toggleSelected() {
     return Genre(
       name: name,

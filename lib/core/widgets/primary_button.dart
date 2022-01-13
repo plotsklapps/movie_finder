@@ -5,12 +5,14 @@ class PrimaryButton extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.onPressed,
+      this.isLoading = false,
       this.width = double.infinity})
       : super(key: key);
 
   final VoidCallback onPressed;
   final String text;
   final double width;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,7 @@ class PrimaryButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              text,
-            ),
+            if (isLoading) const CircularProgressIndicator() else Text(text),
           ],
         ),
         style: ElevatedButton.styleFrom(

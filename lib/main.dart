@@ -4,6 +4,14 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+final dioProvider = Provider<Dio>((ref) {
+  return Dio(
+    BaseOptions(
+      baseUrl: 'https://api.themoviedb.org/3/',
+    ),
+  );
+});
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
