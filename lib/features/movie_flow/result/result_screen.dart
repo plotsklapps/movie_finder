@@ -166,7 +166,7 @@ class MovieImageDetails extends ConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      '4.8',
+                      movie.voteAverage.toString(),
                       style: theme.textTheme.bodyText2?.copyWith(
                         color: theme.textTheme.bodyText2?.color?.withOpacity(
                           0.62,
