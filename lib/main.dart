@@ -1,7 +1,11 @@
 import 'package:moviefinder/core/all_imports.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 final dioProvider = Provider<Dio>((ref) {
