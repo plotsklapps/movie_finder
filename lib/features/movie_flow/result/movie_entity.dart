@@ -5,7 +5,7 @@ class MovieEntity {
   final String title;
   final String overview;
   final num voteAverage;
-  final List<Genre> genreIds;
+  final List<int> genreIds;
   final String releaseDate;
   final String? backdropPath;
   final String? posterPath;
@@ -25,7 +25,7 @@ class MovieEntity {
       title: map['title'],
       overview: map['overview'],
       voteAverage: map['vote_average'],
-      genreIds: List.from(map['genreIds']),
+      genreIds: List.from(map['genre_ids']),
       releaseDate: map['release_date'],
       backdropPath: map['backdrop_path'],
       posterPath: map['poster_path'],
@@ -33,19 +33,14 @@ class MovieEntity {
   }
 
   @override
-  String toString() {
-    return 'Movie(title: $title, overview: $overview, voteAverage = $voteAverage, genres = $genreIds, releaseDate = $releaseDate, backdropPath = $backdropPath, posterPath = $posterPath';
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Movie &&
+    return other is MovieEntity &&
         other.title == title &&
         other.overview == overview &&
         other.voteAverage == voteAverage &&
-        listEquals(other.genres, genreIds) &&
+        listEquals(other.genreIds, genreIds) &&
         other.releaseDate == releaseDate &&
         other.backdropPath == backdropPath &&
         other.posterPath == posterPath;
@@ -60,5 +55,10 @@ class MovieEntity {
         releaseDate.hashCode ^
         backdropPath.hashCode ^
         posterPath.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'MovieEntity(title: $title, overview: $overview, voteAverage: $voteAverage, genreIds: $genreIds, releaseDate: $releaseDate, backdropPath: $backdropPath, posterPath: $posterPath)';
   }
 }

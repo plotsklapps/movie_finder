@@ -13,7 +13,7 @@ class ResultScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(movieFlowControllerProvider).movie.when(
           data: (movie) {
-            Scaffold(
+            return Scaffold(
               appBar: AppBar(),
               body: Column(
                 children: [
@@ -61,9 +61,6 @@ class ResultScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-            );
-            return const Center(
-              child: CircularProgressIndicator(),
             );
           },
           error: (e, s) {
