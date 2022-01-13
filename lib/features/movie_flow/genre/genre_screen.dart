@@ -28,7 +28,7 @@ class GenreScreen extends ConsumerWidget {
             Expanded(
               child: ref.watch(movieFlowControllerProvider).genres.when(
                 data: (genres) {
-                  ListView.separated(
+                  return ListView.separated(
                     itemCount: genres.length,
                     padding: const EdgeInsets.symmetric(
                       vertical: kListItemSpacing,
@@ -47,9 +47,6 @@ class GenreScreen extends ConsumerWidget {
                         height: kListItemSpacing,
                       );
                     },
-                  );
-                  return const Center(
-                    child: CircularProgressIndicator(),
                   );
                 },
                 error: (e, s) {
