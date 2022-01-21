@@ -44,6 +44,7 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     final result = await _movieService.getRecommendedMovie(
       state.rating,
       state.yearsBack,
+      state.movieId,
       selectedGenres,
     );
     state = state.copyWith(
@@ -67,15 +68,19 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state = state.copyWith(yearsBack: updatedYearsBack);
   }
 
-  // void nextPage() {
-  //   if (state.pageController.page! >= 1) {
-  //     if (!state.genres.any((element) => element.isSelected == true)) {
-  //       return;
-  //     }
-  //   }
-  //
-  //   state.pageController.nextPage(
-  //     duration: const Duration(
+  void updateMovieId(int updatedMovieId) {
+    state = state.copyWith(movieId: updatedMovieId);
+  }
+
+// void nextPage() {
+//   if (state.pageController.page! >= 1) {
+//     if (!state.genres.any((element) => element.isSelected == true)) {
+//       return;
+//     }
+//   }
+//
+//   state.pageController.nextPage(
+//     duration: const Duration(
   //       seconds: 1,
   //     ),
   //     curve: Curves.easeOutCubic,

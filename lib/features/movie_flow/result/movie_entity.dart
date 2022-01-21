@@ -9,6 +9,7 @@ class MovieEntity {
   final String releaseDate;
   final String? backdropPath;
   final String? posterPath;
+  final int? movieId;
 
   const MovieEntity({
     required this.title,
@@ -18,6 +19,7 @@ class MovieEntity {
     required this.releaseDate,
     this.backdropPath,
     this.posterPath,
+    this.movieId,
   });
 
   factory MovieEntity.fromMap(Map<String, dynamic> map) {
@@ -29,6 +31,7 @@ class MovieEntity {
       releaseDate: map['release_date'],
       backdropPath: map['backdrop_path'],
       posterPath: map['poster_path'],
+      movieId: map['movieId'],
     );
   }
 
@@ -43,7 +46,8 @@ class MovieEntity {
         listEquals(other.genreIds, genreIds) &&
         other.releaseDate == releaseDate &&
         other.backdropPath == backdropPath &&
-        other.posterPath == posterPath;
+        other.posterPath == posterPath &&
+        other.movieId == movieId;
   }
 
   @override
@@ -54,11 +58,12 @@ class MovieEntity {
         genreIds.hashCode ^
         releaseDate.hashCode ^
         backdropPath.hashCode ^
-        posterPath.hashCode;
+        posterPath.hashCode ^
+        movieId.hashCode;
   }
 
   @override
   String toString() {
-    return 'MovieEntity(title: $title, overview: $overview, voteAverage: $voteAverage, genreIds: $genreIds, releaseDate: $releaseDate, backdropPath: $backdropPath, posterPath: $posterPath)';
+    return 'MovieEntity(title: $title, overview: $overview, voteAverage: $voteAverage, genreIds: $genreIds, releaseDate: $releaseDate, backdropPath: $backdropPath, posterPath: $posterPath), movieId: $movieId';
   }
 }

@@ -9,6 +9,7 @@ class Movie {
   final String releaseDate;
   final String? backdropPath;
   final String? posterPath;
+  final int? movieId;
 
   const Movie({
     required this.title,
@@ -18,6 +19,7 @@ class Movie {
     required this.releaseDate,
     this.backdropPath,
     this.posterPath,
+    this.movieId,
   });
 
   Movie.initial()
@@ -27,7 +29,8 @@ class Movie {
         genres = [],
         releaseDate = '',
         backdropPath = '',
-        posterPath = '';
+        posterPath = '',
+        movieId = 0;
 
   factory Movie.fromEntity(MovieEntity entity, List<Genre> genres) {
     return Movie(
@@ -42,6 +45,7 @@ class Movie {
       backdropPath:
           'https://image.tmdb.org/t/p/original/${entity.backdropPath}',
       posterPath: 'https://image.tmdb.org/t/p/original/${entity.posterPath}',
+      movieId: entity.movieId,
     );
   }
 
@@ -50,7 +54,7 @@ class Movie {
 
   @override
   String toString() {
-    return 'Movie(title: $title, overview: $overview, voteAverage = $voteAverage, genres = $genres, releaseDate = $releaseDate, backdropPath = $backdropPath, posterPath = $posterPath';
+    return 'Movie(title: $title, overview: $overview, voteAverage = $voteAverage, genres = $genres, releaseDate = $releaseDate, backdropPath = $backdropPath, posterPath = $posterPath, movieId = $movieId';
   }
 
   @override
@@ -62,7 +66,8 @@ class Movie {
         other.overview == overview &&
         other.voteAverage == voteAverage &&
         listEquals(other.genres, genres) &&
-        other.releaseDate == releaseDate;
+        other.releaseDate == releaseDate &&
+        other.movieId == movieId;
   }
 
   @override
@@ -73,6 +78,7 @@ class Movie {
         genres.hashCode ^
         releaseDate.hashCode ^
         backdropPath.hashCode ^
-        posterPath.hashCode;
+        posterPath.hashCode ^
+        movieId.hashCode;
   }
 }

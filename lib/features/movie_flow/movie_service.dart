@@ -8,7 +8,7 @@ final movieServiceProvider = Provider<MovieService>((ref) {
 abstract class MovieService {
   Future<List<Genre>> getGenres();
   Future<Movie> getRecommendedMovie(
-      int rating, int yearsBack, List<Genre> genres,
+      int rating, int yearsBack, int movieId, List<Genre> genres,
       [DateTime? yearsBackFromDate]);
 }
 
@@ -26,7 +26,7 @@ class TMDBMovieService implements MovieService {
 
   @override
   Future<Movie> getRecommendedMovie(
-      int rating, int yearsBack, List<Genre> genres,
+      int rating, int yearsBack, int movieId, List<Genre> genres,
       [DateTime? yearsBackFromDate]) async {
     final date = yearsBackFromDate ?? DateTime.now();
     final year = date.year - yearsBack;
@@ -35,6 +35,7 @@ class TMDBMovieService implements MovieService {
       rating.toDouble(),
       '$year-01-01',
       genreIds,
+      movieId,
     );
     final movies =
         movieEntities.map((e) => Movie.fromEntity(e, genres)).toList();
