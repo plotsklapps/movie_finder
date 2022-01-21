@@ -7,7 +7,14 @@ final movieRepositoryProvider = Provider<MovieRepository>((ref) {
 
 abstract class MovieRepository {
   Future<List<GenreEntity>> getMovieGenres();
+
   Future<List<MovieEntity>> getRecommendedMovies(
+    double rating,
+    String date,
+    String genreIds,
+  );
+
+  Future<List<MovieEntity>> getSimilarMovies(
     double rating,
     String date,
     String genreIds,
@@ -32,20 +39,43 @@ class TMDBMovieRepository implements MovieRepository {
 
   @override
   Future<List<MovieEntity>> getRecommendedMovies(
-      double rating, String date, String genreIds) async {
-    final response = await dio.get('discover/movie', queryParameters: {
-      'api_key': api,
-      'language': 'en-US',
-      'sort-by': 'popularity.desc',
-      'include-adult': 'true',
-      'vote_average.gte': rating,
-      'page': 1,
-      'release-date.gte': date,
-      'with_genres': genreIds,
-    });
+    double rating,
+    String date,
+    String genreIds,
+  ) async {
+    final response = await dio.get(
+      'discover/movie',
+      queryParameters: {
+        'api_key': api,
+        'language': 'en-US',
+        'sort-by': 'popularity.desc',
+        'include-adult': 'true',
+        'vote_average.gte': rating,
+        'page': 1,
+        'release-date.gte': date,
+        'with_genres': genreIds,
+      },
+    );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
     final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
 
     return movies;
+  }
+
+  @override
+  Future<List<MovieEntity>> getSimilarMovies(
+    double rating,
+    String date,
+    String genreIds,
+  ) async {
+    final response =
+        await dio.get('movie/{movie_id}/similar', queryParameters: {
+      'api_key': api,
+      'language': 'en-US',
+    });
+    final results = List<Map<String, dynamic>>.from(response.data['results']);
+    final similars = results.map((e) => MovieEntity.fromMap(e)).toList();
+
+    return similars;
   }
 }
