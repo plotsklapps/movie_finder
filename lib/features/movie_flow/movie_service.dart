@@ -8,8 +8,12 @@ final movieServiceProvider = Provider<MovieService>((ref) {
 abstract class MovieService {
   Future<List<Genre>> getGenres();
   Future<Movie> getRecommendedMovie(
-      int rating, int yearsBack, int movieId, List<Genre> genres,
-      [DateTime? yearsBackFromDate]);
+    int rating,
+    int yearsBack,
+    List<Genre> genres, [
+    DateTime? yearsBackFromDate,
+  ]);
+  Future<List<Movie>> getSimilarMovies(int movieId, List<Genre> genres);
 }
 
 class TMDBMovieService implements MovieService {
@@ -25,9 +29,7 @@ class TMDBMovieService implements MovieService {
   }
 
   @override
-  Future<Movie> getRecommendedMovie(
-      int rating, int yearsBack, int movieId, List<Genre> genres,
-      [DateTime? yearsBackFromDate]) async {
+  Future<Movie> getRecommendedMovie(int rating, int yearsBack, List<Genre> genres, [DateTime? yearsBackFromDate]) async {
     final date = yearsBackFromDate ?? DateTime.now();
     final year = date.year - yearsBack;
     final genreIds = genres.map((e) => e.id).toList().join(',');
@@ -35,14 +37,19 @@ class TMDBMovieService implements MovieService {
       rating.toDouble(),
       '$year-01-01',
       genreIds,
-      movieId,
     );
-    final movies =
-        movieEntities.map((e) => Movie.fromEntity(e, genres)).toList();
+    final movies = movieEntities.map((e) => Movie.fromEntity(e, genres)).toList();
 
     final rnd = Random();
     final randomMovie = movies[rnd.nextInt(movies.length)];
 
     return randomMovie;
+  }
+
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId, List<Genre> genres) async {
+    final movieEntities = await _movieRepository.getSimilarMovies(movieId);
+    final similarMovies = movieEntities.map((e) => Movie.fromEntity(e, genres)).toList();
+    return similarMovies;
   }
 }

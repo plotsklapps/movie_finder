@@ -1,14 +1,13 @@
 import 'package:moviefinder/core/all_imports.dart';
 
-final movieFlowControllerProvider =
-    StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
-        (ref) {
+final movieFlowControllerProvider = StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>((ref) {
   return MovieFlowController(
     MovieFlowState(
       movie: AsyncValue.data(
         Movie.initial(),
       ),
       genres: const AsyncValue.data([]),
+      similarmovies: const AsyncValue.data([]),
     ),
     ref.watch(movieServiceProvider),
   );
@@ -44,12 +43,21 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     final result = await _movieService.getRecommendedMovie(
       state.rating,
       state.yearsBack,
-      state.movieId,
       selectedGenres,
     );
     state = state.copyWith(
       movie: AsyncValue.data(result),
     );
+  }
+
+  Future<void> getSimilarMovies() async {
+    state = state.copyWith(similarMovies: const AsyncValue.loading());
+
+    final movieId = state.movie.asData!.value.id;
+    final genre = state.genres.asData!.value;
+    final result = await _movieService.getSimilarMovies(movieId, genres);
+
+    state = state.copyWith(similarMovies: AsyncValue.data(result));
   }
 
   void toggleSelected(Genre genre) {

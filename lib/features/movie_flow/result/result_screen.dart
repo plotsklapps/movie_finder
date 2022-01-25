@@ -49,6 +49,17 @@ class ResultScreen extends ConsumerWidget {
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Similar Movies',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ),
+                        ),
+                        const SimilarMovies(),
                       ],
                     ),
                   ),
@@ -90,13 +101,10 @@ class CoverImage extends StatelessWidget {
       ),
       child: ShaderMask(
         shaderCallback: (rect) {
-          return LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).scaffoldBackgroundColor,
-                Colors.transparent,
-              ]).createShader(
+          return LinearGradient(begin: Alignment.center, end: Alignment.bottomCenter, colors: [
+            Theme.of(context).scaffoldBackgroundColor,
+            Colors.transparent,
+          ]).createShader(
             Rect.fromLTRB(
               0.0,
               0.0,
