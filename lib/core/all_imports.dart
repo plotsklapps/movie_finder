@@ -33,5 +33,6 @@ export 'package:moviefinder/features/movie_flow/rating/rating_screen.dart';
 export 'package:moviefinder/features/movie_flow/result/movie.dart';
 export 'package:moviefinder/features/movie_flow/result/result_screen.dart';
 export 'package:moviefinder/features/movie_flow/result/movie_entity.dart';
+export 'package:moviefinder/features/movie_flow/result/similar_movies.dart';
 
 export 'package:moviefinder/features/movie_flow/years_back/years_back_screen.dart';

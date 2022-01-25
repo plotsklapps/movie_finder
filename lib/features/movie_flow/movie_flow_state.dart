@@ -5,34 +5,34 @@ class MovieFlowState {
   // final PageController pageController;
   final int rating;
   final int yearsBack;
-  final int movieId;
   final AsyncValue<List<Genre>> genres;
   final AsyncValue<Movie> movie;
+  final AsyncValue<List<Movie>> similarMovies;
 
   const MovieFlowState({
     // required this.pageController,
     required this.movie,
     required this.genres,
+    required this.similarMovies,
     this.rating = 5,
     this.yearsBack = 15,
-    this.movieId = 0,
   });
 
   MovieFlowState copyWith({
     // PageController? pageController,
     int? rating,
     int? yearsBack,
-    int? movieId,
     AsyncValue<List<Genre>>? genres,
     AsyncValue<Movie>? movie,
+    AsyncValue<Movie>>? similarMovies,
   }) {
     return MovieFlowState(
       // pageController: pageController ?? this.pageController,
       rating: rating ?? this.rating,
       yearsBack: yearsBack ?? this.yearsBack,
-      movieId: movieId ?? this.movieId,
       genres: genres ?? this.genres,
       movie: movie ?? this.movie,
+      similarMovies: similarMovies ?? this.similarMovies,
     );
   }
 
@@ -44,18 +44,14 @@ class MovieFlowState {
         // other.pageController == pageController &&
         other.rating == rating &&
         other.yearsBack == yearsBack &&
-        other.movieId == movieId &&
         other.genres == genres &&
-        other.movie == movie;
+        other.movie == movie &&
+        other.similarMovies == similarMovies;
   }
 
   @override
   int get hashCode {
     return // pageController.hashCode ^
-        rating.hashCode ^
-            yearsBack.hashCode ^
-            movieId.hashCode ^
-            genres.hashCode ^
-            movie.hashCode;
+        rating.hashCode ^ yearsBack.hashCode ^ genres.hashCode ^ movie.hashCode ^ similarMovies.hashCode;
   }
 }

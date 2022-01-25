@@ -13,8 +13,7 @@ class YearsBackScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed:
-              ref.read(movieFlowPageControllerProvider.notifier).previousPage,
+          onPressed: ref.read(movieFlowPageControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -45,35 +44,27 @@ class YearsBackScreen extends ConsumerWidget {
                   ),
                 ),
                 Slider(
-                  value: ref
-                      .watch(movieFlowControllerProvider)
-                      .yearsBack
-                      .toDouble(),
+                  value: ref.watch(movieFlowControllerProvider).yearsBack.toDouble(),
                   onChanged: (value) {
-                    ref
-                        .read(movieFlowControllerProvider.notifier)
-                        .updateYearsBack(
+                    ref.read(movieFlowControllerProvider.notifier).updateYearsBack(
                           value.toInt(),
                         );
                   },
                   min: 0,
                   max: 70,
                   divisions: 69,
-                  label:
-                      '${ref.watch(movieFlowControllerProvider).yearsBack.toDouble()}',
+                  label: '${ref.watch(movieFlowControllerProvider).yearsBack.toDouble()}',
                 )
               ],
             ),
             const Spacer(),
             PrimaryButton(
               onPressed: () async {
-                await ref
-                    .read(movieFlowControllerProvider.notifier)
-                    .getRecommendedMovie();
+                await ref.read(movieFlowControllerProvider.notifier).getRecommendedMovie();
+                await ref.read(movieFlowControllerProvider.notifier).getSimilarMovies();
                 Navigator.of(context).push(ResultScreen.route());
               },
-              isLoading:
-                  ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
+              isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
               text: 'Let\'s gooo',
             ),
             const SizedBox(

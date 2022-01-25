@@ -12,15 +12,9 @@ abstract class MovieRepository {
     double rating,
     String date,
     String genreIds,
-    int movieId,
   );
 
-  Future<List<MovieEntity>> getSimilarMovies(
-    double rating,
-    String date,
-    String genreIds,
-    int movieId,
-  );
+  Future<List<MovieEntity>> getSimilarMovies(int movieId);
 }
 
 class TMDBMovieRepository implements MovieRepository {
@@ -44,7 +38,6 @@ class TMDBMovieRepository implements MovieRepository {
     double rating,
     String date,
     String genreIds,
-    int movieId,
   ) async {
     final response = await dio.get(
       'discover/movie',
@@ -57,7 +50,6 @@ class TMDBMovieRepository implements MovieRepository {
         'page': 1,
         'release-date.gte': date,
         'with_genres': genreIds,
-        'id': movieId,
       },
     );
 
@@ -67,34 +59,15 @@ class TMDBMovieRepository implements MovieRepository {
     return movies;
   }
 
-  Future<int> getMovieID(
-    int movieId,
-  ) async {
-    final response = await dio.get(
-      'discover/movie',
-      queryParameters: {
-        'id': movieId,
-      },
-    );
-    final int _movieID = response.data['id'];
-    return _movieID;
-  }
-
   @override
-  Future<List<MovieEntity>> getSimilarMovies(
-    double rating,
-    String date,
-    String genreIds,
-    int movieId,
-  ) async {
-    final movieID = await getMovieID(movieId);
-    final response = await dio.get('movie/$movieID/similar', queryParameters: {
+  Future<List<MovieEntity>> getSimilarMovies(int movieId) async {
+    final response = await dio.get('/movie.$movieId/similar', queryParameters: {
       'api_key': api,
       'language': 'en-US',
     });
+
     final results = List<Map<String, dynamic>>.from(response.data['results']);
-    final similars = results.map((e) => MovieEntity.fromMap(e)).toList();
-    print(similars);
-    return similars;
+    final similarMovies = results.map((e) => MovieEntity.fromMap(e)).toList();
+    return similarMovies;
   }
 }
