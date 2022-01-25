@@ -24,7 +24,7 @@ class MovieFlowState {
     int? yearsBack,
     AsyncValue<List<Genre>>? genres,
     AsyncValue<Movie>? movie,
-    AsyncValue<Movie>>? similarMovies,
+    AsyncValue<List<Movie>>? similarMovies,
   }) {
     return MovieFlowState(
       // pageController: pageController ?? this.pageController,
@@ -52,6 +52,10 @@ class MovieFlowState {
   @override
   int get hashCode {
     return // pageController.hashCode ^
-        rating.hashCode ^ yearsBack.hashCode ^ genres.hashCode ^ movie.hashCode ^ similarMovies.hashCode;
+        rating.hashCode ^
+            yearsBack.hashCode ^
+            genres.hashCode ^
+            movie.hashCode ^
+            similarMovies.hashCode;
   }
 }

@@ -30,7 +30,7 @@ class Movie {
         genres = [],
         releaseDate = '',
         backdropPath = '',
-        posterPath = '',
+        posterPath = '';
 
   factory Movie.fromEntity(MovieEntity entity, List<Genre> genres) {
     return Movie(
@@ -38,32 +38,47 @@ class Movie {
       title: entity.title,
       overview: entity.overview,
       voteAverage: entity.voteAverage,
-      genres: genres.where((genre) => entity.genreIds.contains(genre.id)).toList(
-            growable: false,
-          ),
+      genres:
+          genres.where((genre) => entity.genreIds.contains(genre.id)).toList(
+                growable: false,
+              ),
       releaseDate: entity.releaseDate,
-      backdropPath: 'https://image.tmdb.org/t/p/original/${entity.backdropPath}',
+      backdropPath:
+          'https://image.tmdb.org/t/p/original/${entity.backdropPath}',
       posterPath: 'https://image.tmdb.org/t/p/original/${entity.posterPath}',
-      movieId: entity.movieId,
     );
   }
 
-  String get genresCommaSeparated => genres.map((e) => e.name).toList().join(', ');
+  String get genresCommaSeparated =>
+      genres.map((e) => e.name).toList().join(', ');
 
   @override
   String toString() {
-    return 'Movie(id: $id, title: $title, overview: $overview, voteAverage = $voteAverage, genres = $genres, releaseDate = $releaseDate, backdropPath = $backdropPath, posterPath = $posterPath, movieId = $movieId';
+    return 'Movie(id: $id, title: $title, overview: $overview, voteAverage = $voteAverage, genres = $genres, releaseDate = $releaseDate, backdropPath = $backdropPath, posterPath = $posterPath';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Movie && other.id == id && other.title == title && other.overview == overview && other.voteAverage == voteAverage && listEquals(other.genres, genres) && other.releaseDate == releaseDate && other.movieId == movieId;
+    return other is Movie &&
+        other.id == id &&
+        other.title == title &&
+        other.overview == overview &&
+        other.voteAverage == voteAverage &&
+        listEquals(other.genres, genres) &&
+        other.releaseDate == releaseDate;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ title.hashCode ^ overview.hashCode ^ voteAverage.hashCode ^ genres.hashCode ^ releaseDate.hashCode ^ backdropPath.hashCode ^ posterPath.hashCode ^ movieId.hashCode;
+    return id.hashCode ^
+        title.hashCode ^
+        overview.hashCode ^
+        voteAverage.hashCode ^
+        genres.hashCode ^
+        releaseDate.hashCode ^
+        backdropPath.hashCode ^
+        posterPath.hashCode;
   }
 }

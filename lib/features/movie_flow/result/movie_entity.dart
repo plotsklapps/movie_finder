@@ -13,7 +13,7 @@ class MovieEntity {
   final int? movieId;
 
   const MovieEntity({
-    required this.id;
+    required this.id,
     required this.title,
     required this.overview,
     required this.voteAverage,
@@ -43,7 +43,7 @@ class MovieEntity {
     if (identical(this, other)) return true;
 
     return other is MovieEntity &&
-    other.id == id &&
+        other.id == id &&
         other.title == title &&
         other.overview == overview &&
         other.voteAverage == voteAverage &&
@@ -56,9 +56,8 @@ class MovieEntity {
 
   @override
   int get hashCode {
-    return 
-    id.hashCode ^
-    title.hashCode ^
+    return id.hashCode ^
+        title.hashCode ^
         overview.hashCode ^
         voteAverage.hashCode ^
         genreIds.hashCode ^

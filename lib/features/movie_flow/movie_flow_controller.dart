@@ -1,13 +1,15 @@
 import 'package:moviefinder/core/all_imports.dart';
 
-final movieFlowControllerProvider = StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>((ref) {
+final movieFlowControllerProvider =
+    StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
+        (ref) {
   return MovieFlowController(
     MovieFlowState(
       movie: AsyncValue.data(
         Movie.initial(),
       ),
       genres: const AsyncValue.data([]),
-      similarmovies: const AsyncValue.data([]),
+      similarMovies: const AsyncValue.data([]),
     ),
     ref.watch(movieServiceProvider),
   );
@@ -54,7 +56,7 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state = state.copyWith(similarMovies: const AsyncValue.loading());
 
     final movieId = state.movie.asData!.value.id;
-    final genre = state.genres.asData!.value;
+    final genres = state.genres.asData!.value;
     final result = await _movieService.getSimilarMovies(movieId, genres);
 
     state = state.copyWith(similarMovies: AsyncValue.data(result));
@@ -74,10 +76,6 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
 
   void updateYearsBack(int updatedYearsBack) {
     state = state.copyWith(yearsBack: updatedYearsBack);
-  }
-
-  void updateMovieId(int updatedMovieId) {
-    state = state.copyWith(movieId: updatedMovieId);
   }
 
 // void nextPage() {

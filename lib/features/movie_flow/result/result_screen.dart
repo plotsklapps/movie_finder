@@ -101,10 +101,13 @@ class CoverImage extends StatelessWidget {
       ),
       child: ShaderMask(
         shaderCallback: (rect) {
-          return LinearGradient(begin: Alignment.center, end: Alignment.bottomCenter, colors: [
-            Theme.of(context).scaffoldBackgroundColor,
-            Colors.transparent,
-          ]).createShader(
+          return LinearGradient(
+              begin: Alignment.center,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).scaffoldBackgroundColor,
+                Colors.transparent,
+              ]).createShader(
             Rect.fromLTRB(
               0.0,
               0.0,
