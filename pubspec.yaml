@@ -3,10 +3,10 @@ description: Finder of Movies
 
 publish_to: 'none'
 
-version: 0.0.1+1
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.12.1 <3.0.0"
 
 dependencies:
   flutter:

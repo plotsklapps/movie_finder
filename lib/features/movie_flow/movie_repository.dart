@@ -61,7 +61,7 @@ class TMDBMovieRepository implements MovieRepository {
 
   @override
   Future<List<MovieEntity>> getSimilarMovies(int movieId) async {
-    final response = await dio.get('/movie.$movieId/similar', queryParameters: {
+    final response = await dio.get('/movie/$movieId/similar', queryParameters: {
       'api_key': api,
       'language': 'en-US',
     });
