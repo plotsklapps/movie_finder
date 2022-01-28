@@ -54,10 +54,13 @@ class ResultScreen extends ConsumerWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Similar Movies',
+                              'Or try these',
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 24.0,
                         ),
                         const SimilarMovies(),
                       ],
