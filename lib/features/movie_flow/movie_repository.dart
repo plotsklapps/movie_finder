@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:moviefinder/core/all_imports.dart';
 
 final movieRepositoryProvider = Provider<MovieRepository>((ref) {
@@ -23,14 +25,28 @@ class TMDBMovieRepository implements MovieRepository {
 
   @override
   Future<List<GenreEntity>> getMovieGenres() async {
-    final response = await dio.get('genre/movie/list', queryParameters: {
-      'api_key': api,
-      'language': 'en-US',
-    });
-    final results = List<Map<String, dynamic>>.from(response.data['genres']);
-    final genres = results.map((e) => GenreEntity.fromMap(e)).toList();
+    try {
+      final response = await dio.get('genre/movie/list', queryParameters: {
+        'api_key': api,
+        'language': 'en-US',
+      });
+      final results = List<Map<String, dynamic>>.from(response.data['genres']);
+      final genres = results.map((e) => GenreEntity.fromMap(e)).toList();
 
-    return genres;
+      return genres;
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw Failure(
+          message: 'No internet connection',
+          exception: e,
+          code: e.response?.statusCode,
+        );
+      }
+      throw Failure(
+        message: e.response?.statusMessage ?? 'Something went wrong',
+        code: e.response?.statusCode,
+      );
+    }
   }
 
   @override
@@ -39,35 +55,66 @@ class TMDBMovieRepository implements MovieRepository {
     String date,
     String genreIds,
   ) async {
-    final response = await dio.get(
-      'discover/movie',
-      queryParameters: {
-        'api_key': api,
-        'language': 'en-US',
-        'sort-by': 'popularity.desc',
-        'include-adult': 'true',
-        'vote_average.gte': rating,
-        'page': 1,
-        'release-date.gte': date,
-        'with_genres': genreIds,
-      },
-    );
+    try {
+      final response = await dio.get(
+        'discover/movie',
+        queryParameters: {
+          'api_key': api,
+          'language': 'en-US',
+          'sort-by': 'popularity.desc',
+          'include-adult': 'true',
+          'vote_average.gte': rating,
+          'page': 1,
+          'release-date.gte': date,
+          'with_genres': genreIds,
+        },
+      );
 
-    final results = List<Map<String, dynamic>>.from(response.data['results']);
-    final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+      final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
 
-    return movies;
+      return movies;
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw Failure(
+          message: 'No internet connection',
+          exception: e,
+          code: e.response?.statusCode,
+        );
+      }
+      throw Failure(
+        message: e.response?.statusMessage ?? 'Something went wrong',
+        exception: e,
+        code: e.response?.statusCode,
+      );
+    }
   }
 
   @override
   Future<List<MovieEntity>> getSimilarMovies(int movieId) async {
-    final response = await dio.get('/movie/$movieId/similar', queryParameters: {
-      'api_key': api,
-      'language': 'en-US',
-    });
+    try {
+      final response =
+          await dio.get('/movie/$movieId/similar', queryParameters: {
+        'api_key': api,
+        'language': 'en-US',
+      });
 
-    final results = List<Map<String, dynamic>>.from(response.data['results']);
-    final similarMovies = results.map((e) => MovieEntity.fromMap(e)).toList();
-    return similarMovies;
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+      final similarMovies = results.map((e) => MovieEntity.fromMap(e)).toList();
+      return similarMovies;
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw Failure(
+          message: 'No internet connection',
+          exception: e,
+          code: e.response?.statusCode,
+        );
+      }
+      throw Failure(
+        message: e.response?.statusMessage ?? 'Something went wrong',
+        exception: e,
+        code: e.response?.statusCode,
+      );
+    }
   }
 }

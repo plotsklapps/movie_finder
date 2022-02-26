@@ -12,6 +12,7 @@ export 'package:dio/dio.dart';
 export 'package:moviefinder/theme/custom_theme.dart';
 
 export 'package:moviefinder/core/widgets/primary_button.dart';
+export 'package:moviefinder/core/failure.dart';
 export 'package:moviefinder/core/constants.dart';
 
 export 'package:moviefinder/features/movie_flow/movie_flow.dart';
